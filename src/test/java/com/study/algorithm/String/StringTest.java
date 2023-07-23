@@ -7,7 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class StringTest {
     @Test
     void 문자열_테스트1(){
-
     }
 }
-    ㅗㅝ ㅠ취;
