@@ -33,7 +33,7 @@ public class StringTest {
     }
 
     @Test
-    public void 문자열_테스트1_정답(){
+    public void 문자열_테스트1_1(){
         StringBuilder builder = new StringBuilder();
         boolean toUpper = true;
         String s = "my name is leesanghak";
@@ -51,5 +51,38 @@ public class StringTest {
             }
         }
         assertEquals("My NaMe Is LeEsAnGhAk",builder.toString());
+    }
+
+//    @Test
+//    public void 문자열_테스트2_압축(){
+//        String data = "abcabbcc";
+//        for(int i=1; i<data.length(); i++){
+//            StringBuilder sb = new StringBuilder();
+//            String prev = "";
+//            int cnt = 1;
+//            for(int j=1; j*i<data.length(); j++){
+//                String thisData = data.substring(j-1,j);
+//                if(prev.equals(thisData)){
+//                    cnt++;
+//                }else {
+//                    if(cnt>0){
+//                        sb.append(cnt);
+//                        sb.append(prev);
+//                        cnt = 1;
+//                    }
+//                }
+//                prev = thisData;
+//            }
+//
+//        }
+//    }
+    @Test
+    public void 삼진법_뒤집기(){
+        int n = 567;
+        String str = Integer.toString(n,3);
+        String reversed = new StringBuilder(str).reverse().toString();
+        int answer = Integer.valueOf(reversed,3);
+        System.out.println(answer);
+        assertEquals(5,answer);
     }
 }
