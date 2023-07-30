@@ -1,11 +1,14 @@
 package com.study.algorithm.String;
 
 import org.apache.logging.log4j.util.StringBuilders;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest
@@ -111,5 +114,32 @@ public class StringTest {
             if(c == '0') zeros++;
         }
         return zeros;
+    }
+
+    @Test
+    public void p와y의개수(){
+        assertTrue(isPCEquals("pPoooYy"));
+    }
+
+    private boolean isPCEquals(String s){
+
+        int pCnt = 0;
+        int yCnt = 0;
+        boolean answer = true;
+        for(char c : s.toCharArray()){
+            if(c == 'p' || c == 'P'){
+                pCnt++;
+            }
+            if(c == 'y' || c == 'Y'){
+                yCnt++;
+            }
+        }
+        if((pCnt == 0 && yCnt == 0) || pCnt == yCnt){
+            answer = true;
+        }else{
+            answer = false;
+        }
+        return answer;
+
     }
 }
