@@ -1,4 +1,4 @@
-package com.study.algorithm.String;
+package com.study.algorithm;
 
 import org.apache.logging.log4j.util.StringBuilders;
 import org.assertj.core.api.Assertions;

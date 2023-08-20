@@ -1,4 +1,4 @@
-package com.study.algorithm.Recursion;
+package com.study.algorithm;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
