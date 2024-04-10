@@ -6,6 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.IntStream;
 
 
 @SpringBootTest
@@ -30,5 +33,16 @@ public class ArrayTest {
             answer[i] = sub[k];
         }
         return answer;
+    }
+
+    @Test
+    public void test2Action() {
+        String s = "Zbcdefg";
+        s = s.chars().boxed().sorted((v1, v2) -> v2 - v1)
+                .collect(StringBuilder::new,
+                        StringBuilder::appendCodePoint,
+                        StringBuilder::append)
+                .toString();
+        Assertions.assertEquals(s, "gfedcbZ");
     }
 }
