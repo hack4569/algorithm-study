@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -44,5 +45,28 @@ public class ArrayTest {
                         StringBuilder::append)
                 .toString();
         Assertions.assertEquals(s, "gfedcbZ");
+    }
+
+    @Test
+    public void test3Action() {
+        String[] sArr1 = {"sun", "bed", "car"};
+        String[] sArr2 = {"abce", "abcd", "cdx"};
+
+        String[] answer1 = {"car", "bed", "sun"};
+        String[] answer2 = {"abcd", "abce", "cdx"};
+        Assertions.assertArrayEquals(this.test3(sArr1,1), answer1);
+        Assertions.assertArrayEquals(this.test3(sArr2,2), answer2);
+    }
+
+    private String[] test3(String[] strings, int n) {
+        Arrays.sort(strings, (v1, v2) -> {
+            String s1 = v1.substring(n, n+1);
+            String s2 = v2.substring(n, n+1);
+            if (s1.equals(s2)) {
+                return v1.compareTo(v2);
+            }
+            return s1.compareTo(s2);
+        });
+        return strings;
     }
 }
