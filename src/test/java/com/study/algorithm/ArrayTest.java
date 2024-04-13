@@ -69,4 +69,38 @@ public class ArrayTest {
         });
         return strings;
     }
+
+    @Test
+    public void test4Action() {
+        String[] info = {"java backend junior pizza 150","python frontend senior chicken 210","python frontend senior chicken 150","cpp backend senior pizza 260","java backend junior chicken 80","python backend senior chicken 50"};
+        String[] query = {"java and backend and junior and pizza 100","python and frontend and senior and chicken 200","cpp and - and senior and pizza 250","- and backend and senior and - 150","- and - and - and chicken 100","- and - and - and - 150"};
+
+        int[] answer = Arrays.stream(query).mapToInt(v1 -> {
+            String[] allQuery = v1.split("and");
+            String lang = allQuery[0].trim();
+            String job = allQuery[1].trim();
+            String level = allQuery[2].trim();
+            String[] lastStr = allQuery[3].split(" ");
+            String food = lastStr[lastStr.length-2];
+            int score = Integer.parseInt(lastStr[lastStr.length-1]);
+            long sum = Arrays.stream(info).filter(infoI -> {
+                String[] infos = infoI.split(" ");
+                int infoScore = Integer.parseInt(infos[infos.length-1]);
+                return this.findKeyWord(infoI, lang) &&
+                        this.findKeyWord(infoI, job) &&
+                        this.findKeyWord(infoI, level) &&
+                        this.findKeyWord(infoI, food) &&
+                        infoScore >= score;
+            }).count();
+            return (int) sum;
+        }).toArray();
+
+        int[] target = {1,1,1,1,2,4};
+        Assertions.assertArrayEquals(answer, target);
+
+    }
+
+    private boolean findKeyWord(String infoI, String target) {
+        return target.equals("-") ? true : infoI.indexOf(target) != -1;
+    }
 }
