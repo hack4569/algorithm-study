@@ -83,14 +83,16 @@ public class ArrayTest {
             String[] lastStr = allQuery[3].split(" ");
             String food = lastStr[lastStr.length-2];
             int score = Integer.parseInt(lastStr[lastStr.length-1]);
+
             long sum = Arrays.stream(info).filter(infoI -> {
                 String[] infos = infoI.split(" ");
                 int infoScore = Integer.parseInt(infos[infos.length-1]);
-                return this.findKeyWord(infoI, lang) &&
+                return infoScore >= score &&
+                        this.findKeyWord(infoI, lang) &&
                         this.findKeyWord(infoI, job) &&
                         this.findKeyWord(infoI, level) &&
-                        this.findKeyWord(infoI, food) &&
-                        infoScore >= score;
+                        this.findKeyWord(infoI, food)
+                        ;
             }).count();
             return (int) sum;
         }).toArray();
@@ -102,5 +104,26 @@ public class ArrayTest {
 
     private boolean findKeyWord(String infoI, String target) {
         return target.equals("-") ? true : infoI.indexOf(target) != -1;
+    }
+
+    @Test
+    public void test5Action() {
+        int[] nums1 = {3,3,2,4,5};
+        int answer1 = 2;
+        int[] nums2 = {3,3,3,2,2,2};
+        int answer2 = 2;
+        Assertions.assertEquals(answer1, test5(nums1));
+        Assertions.assertEquals(answer2, test5(nums2));
+    }
+
+    /**
+     * https://school.programmers.co.kr/learn/courses/30/lessons/1845
+     * @param nums
+     * @return
+     */
+    private int test5(int[] nums) {
+        int length = (int) nums.length / 2;
+        nums = Arrays.stream(nums).distinct().toArray();
+        return length < nums.length ? length : nums.length;
     }
 }
