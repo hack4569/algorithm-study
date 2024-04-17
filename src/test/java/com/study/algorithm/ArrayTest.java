@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -127,27 +124,5 @@ public class ArrayTest {
         return length < nums.length ? length : nums.length;
     }
 
-    @Test
-    public void test6Action() {
-        String[] phone_book = {"119", "97674223", "1195524421"};
-        Assertions.assertEquals(false, test6(phone_book));
-    }
 
-    /**
-     * https://school.programmers.co.kr/learn/courses/30/lessons/42577?language=java
-     * @param phone_book
-     * @return
-     */
-    private boolean test6(String[] phone_book) {
-        List<String> list = Arrays.stream(phone_book).sorted((a, b)->{
-            return a.length() - b.length();
-        }).collect(Collectors.toList());
-        for (String str1 : list) {
-            for (String str2 : list) {
-                if (str1.length() >= str2.length()) continue;
-                if (str1.equals(str2.substring(0,str1.length()))) return false;
-            }
-        }
-        return true;
-    }
 }
