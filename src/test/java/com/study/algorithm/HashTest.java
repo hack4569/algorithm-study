@@ -117,4 +117,63 @@ public class HashTest {
         }
         return map;
     }
+
+    @Test
+    public void test4Action() {
+        int[] numbers = {1,2,3,4,6,7,8,0};
+        int answer = 14;
+        Assertions.assertEquals(answer, this.test4(numbers));
+    }
+
+    /**
+     * 없는 숫자 더하기
+     * https://school.programmers.co.kr/learn/courses/30/lessons/86051
+     * @param numbers
+     * @return
+     */
+    private int test4(int[] numbers) {
+        Arrays.sort(numbers);
+        int answer = 0;
+        for (int i = 0; i<10; i++) {
+            if (Arrays.binarySearch(numbers, i) < 0) {
+                answer += i;
+            }
+        }
+        return answer;
+    }
+    @Test
+    public void test5Action() {
+        String answer = "mislav";
+        String[] participant = {"mislav", "stanko", "mislav", "ana"};
+        String[] completion = {"mislav", "stanko", "ana"};
+        Assertions.assertEquals(answer, this.test5(participant, completion));
+    }
+
+    /**
+     * 완주하지 못한 선수
+     * https://school.programmers.co.kr/learn/courses/30/lessons/42576
+     * @param participant
+     * @param completion
+     * @return
+     */
+    private String test5(String[] participant, String[] completion) {
+        String answer = "";
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String p : participant) {
+            map.putIfAbsent(p, 0);
+            map.put(p, map.get(p) +1);
+        }
+        for (String c : completion) {
+            map.put(c, map.get(c) -1);
+        }
+        for (String p : participant) {
+            if (map.get(p) > 0) {
+                answer = p;
+                break;
+            }
+        }
+        return answer;
+    }
 }
+
+
